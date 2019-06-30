@@ -22,7 +22,7 @@ class User:
           f.write(self.name + '\n')
           for  movie in self.movies:
                f.write('{},{},{}\n'.format(movie.name,movie.genere,str(movie.watched)))
-    @classmethod                  
+     @classmethod                  
     def load_from_file(cls,filename):
       with open(filename,'r') as f:
         content = f.readlines();
@@ -38,3 +38,13 @@ class User:
         user = cls(username)
         user.movies = allMovies
         return user        
+      def convert_to_json(self):
+          return{
+            "name":self.name,
+            "movies":[
+              movies.json() for movie in self.movies
+
+            ]
+        
+        
+           }  
